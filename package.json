@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "bower": "*",
-    "http-server": "*"
+    "bower": "*"
   }
 }
