@@ -17,10 +17,10 @@ $ make install
 ```
 
 ## ビルトインサーバーの起動
-localhost:8080でアクセス可能
+SERVER_PATHにドキュメントルートを指定する。起動後localhost:8080でアクセス可能
 
 ```
-$ make server
+$ make server SERVER_PATH=./xxxx
 ```
 
 ## Mission
