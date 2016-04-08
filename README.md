@@ -17,7 +17,7 @@ $ make install
 ```
 
 ## 簡易WebAPサーバーの起動
-SERVER_PATHにドキュメントルートを指定する。起動後localhost:8888でアクセス可能
+SERVER_PATHにserver.jsを呼び出すディレクトリを指定する。起動後localhost:8888でアクセス可能
 
 ```
 $ make server SERVER_PATH=./xxxx
