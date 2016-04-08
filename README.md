@@ -16,7 +16,7 @@ $ npm -v
 $ make install
 ```
 
-## ビルトインサーバーの起動
+## 簡易WebAPサーバーの起動
 SERVER_PATHにドキュメントルートを指定する。起動後localhost:8888でアクセス可能
 
 ```
