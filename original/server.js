@@ -66,7 +66,15 @@ http.createServer(function(request, response) {
             response.writeHead(200,{"Content-Type": "image/png"});
             response.end( buf,'binary');
             break;
+        case '/favicon.ico':
+            var buf = fs.readFileSync(__dirname + '/public/favicon.ico','binary');
+            response.writeHead(200,{"Content-Type": "image/x-icon"});
+            response.end( buf,'binary');
+            break;
         default:
+            response.writeHead(404, {"Content-Type": "text/html"});
+            response.write("Not Found");
+            response.end();
             break;
     }
 }).listen(8888);
