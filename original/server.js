@@ -11,6 +11,17 @@ http.createServer(function(request, response) {
                         response.end();
                     });
                     break;
+                case '/api/missions':
+                    if (request.headers['x-requested-with'] == "XMLHttpRequest") {
+                        response.writeHead(200, {"Content-Type": "application/json"});
+                        response.write(JSON.stringify('{"mission":"step5:タイトルの「じゃんけんゲーム」を「rock-paper-scissors」にonload後に変更しましょう。"}'));
+                        response.end();
+                    }else{
+                        response.writeHead(400, {"Content-Type": "application/json"});
+                        response.write(JSON.stringify('{"message":"bad request"}'));
+                        response.end();
+                    } 
+                    break;
                 case '/bower_components/bootstrap/dist/css/bootstrap.css':
                     fs.readFile(__dirname + '/public/bower_components/bootstrap/dist/css/bootstrap.css', 'UTF-8', function(err, data) {
                         response.writeHead(200, {"Content-Type": "text/css"});

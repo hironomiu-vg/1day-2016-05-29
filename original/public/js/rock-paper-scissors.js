@@ -1,9 +1,24 @@
-$(function(){
+jQuery(function($){
   "use strict";
   var HAND_TYPE = [ "rock" , "scissors" , "paper" ];
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
+  window.onload = function() {
+      $.ajax({
+          url: '/api/missions',
+          type: 'GET',
+          dataType: 'json'
+      }).done(function(json, statusText, jqXHR) {
+          var data = $.parseJSON(json);
+          $(".mission1").append("<li>" + data.mission + "</li>");
+      }).fail(function(jqXHR, statusText, errorThrown) {
+          alert("データ取得失敗");
+      }).always(function() {
+          null;
+      });
+  }
+  
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
