@@ -4,7 +4,7 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
-  window.onload = function() {
+  $(function() {
       $.ajax({
           url: '/api/missions',
           type: 'GET',
@@ -16,7 +16,7 @@ jQuery(function($){
           alert("データ取得失敗");
       }).always(function() {
       });
-  };
+  });
   
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
