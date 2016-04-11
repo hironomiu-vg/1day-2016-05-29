@@ -15,9 +15,8 @@ jQuery(function($){
       }).fail(function(jqXHR, statusText, errorThrown) {
           alert("データ取得失敗");
       }).always(function() {
-          null;
       });
-  }
+  };
   
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
