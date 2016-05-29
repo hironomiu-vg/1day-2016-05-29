@@ -69,6 +69,10 @@ jQuery(function($){
   }
 
   function decPlayerHP() {
+    if (playerHP == 1) {
+      alert("You lose!!");
+      location.reload();
+    }
     setPlayerHP(playerHP - 1);
   }
 
@@ -82,6 +86,10 @@ jQuery(function($){
   }
 
   function decBobHP() {
+    if (bobHP == 1) {
+      alert("You win!!");
+      location.reload();
+    }
     setBobHP(bobHP - 1);
   }
 
