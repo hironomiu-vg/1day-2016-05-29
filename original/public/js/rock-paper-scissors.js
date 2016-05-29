@@ -23,7 +23,7 @@ jQuery(function($){
   $('#enemy_hp').text(ENEMY_HP + ' HP')
 
   $('#enemy_image').attr('src', 'img/' + ENEMY_IMG).show()
-  $('#my_image').attr('src', 'img/' + ENEMY_IMG).show()
+  $('#my_image').attr('src', 'img/' + 'character.png').show()
 
   console.log(ENEMY_HP)
 
