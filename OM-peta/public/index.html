@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5 col-xs-12">
+                <div id="siyo" class="col-sm-5 col-xs-12">
                     <div id="side-menu" class="well well-sm">
                         <ul class="nav list-unstyled">
                             <li><h4><strong>現在の仕様</strong></h4>
@@ -72,6 +72,7 @@
                         </ul>
                     </div>
                 </div>
+                <button>切り替えボタン</button>
             </div>
             <hr />
             <footer>
@@ -86,5 +87,19 @@
         <script src="bower_components/vue/dist/vue.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="js/rock-paper-scissors.js"></script>
+        <script>
+            var siyo_flg = true;
+            +$(function(){
+                $('button').on('click', function(){
+                    if(siyo_flg){
+                        $('#siyo').hide()
+                        siyo_flg = false;
+                    } else {
+                    $('#siyo').show()
+                    siyo_flg = true;
+                }
+                })
+            })
+        </script>
     </body>
 </html>
