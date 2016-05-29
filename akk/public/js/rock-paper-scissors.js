@@ -28,14 +28,8 @@ jQuery(function($){
       });
   });
 
-  $(".rsp-btn").click(function(){
-    var opponentHand = bobHand();
-    var result = judge( $(this).attr("id"), opponentHand);
-
-    $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
-    $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
-    $("#result").text(RESULT_MESSAGE[result]);
-  });
+  $(".rsp-btn").click(setRspOnClick);
+  $("#start").click(setRspButtons);
 
   function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
@@ -53,5 +47,29 @@ jQuery(function($){
       result = RESULT_CODE.LOSE;
     }
     return result;
+  }
+
+  function setRspOnClick() {
+    $(".rsp-btn").click(function() {
+      var opponentHand = bobHand();
+      var result = judge( $(this).attr("id"), opponentHand);
+
+      $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
+      $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
+      $("#result").text(RESULT_MESSAGE[result]);
+    });
+  }
+
+  function setRspButtons() {
+    $("#button-area").empty();
+    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='rock'>グー　</button> </div>").appendTo($("#button-area"));
+    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='scissors'>チョキ</button> </div>").appendTo($("#button-area"));
+    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='paper'>パー　</button> </div>").appendTo($("#button-area"));
+    setRspOnClick();
+  }
+
+  function setStartButton() {
+    $("#button-area").empty();
+    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='start'>スタート</button> </div>").appendTo($("#button-area"));
   }
 });
