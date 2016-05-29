@@ -58,13 +58,14 @@ jQuery(function($){
   }
 
   var selected = [];
+  var bobSelected = [];
 
   function setRspOnClick() {
     $(".rsp-btn").click(function() {
       selected.push($(this).attr("id"));
       if (selected.length == 2) {
-        var opponentHands = bobHands(2);
-        selectStep(selected, opponentHands);
+        bobSelected = bobHands(2);
+        selectStep();
         return;
       }
       // var result = judge( $(this).attr("id"), opponentHand);
@@ -90,27 +91,38 @@ jQuery(function($){
   }
 
   function onStart() {
-    console.log("hoge");
     $("#second-button-area").empty();
     selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
-    setTimeout(setRspButtons, 1000);
+    setTimeout(setRspButtons, 0);
   }
 
-  function selectStep(selected, cpuSelected) {
+  function selectStep() {
     var p = $("#second-button-area");
     p.empty();
     var myhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
     for (var i = 0; i < selected.length ; i++) {
-      $("<h4>あなた</h4><img id='myrspimg' src='img/" + selected[i] + ".png' />").appendTo(myhand);
+      $("<h4>あなた</h4><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
     }
     myhand.appendTo(p);
-    console.log(cpuSelected);
+    console.log(bobSelected);
     var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
-    for (var i = 0; i < cpuSelected.length ; i++) {
-      $("<h4>ボブ</h4><img id='myrspimg' src='img/" + cpuSelected[i] + ".png' />").appendTo(bobhand);
+    for (var i = 0; i < bobSelected.length ; i++) {
+      $("<h4>ボブ</h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
     }
     bobhand.appendTo(p);
+    $('.second-rsp-button').click(onSecondSelect);
+  }
+
+  function onSecondSelect() {
+    var bob = bobSelected[Math.floor(Math.random() * bobSelected.length)];
+    var result = judge($(this).attr("id"), bob);
+
+    $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
+    $("#bobrspimg").attr("src", "img/" + bob + ".png");
+    $("#result").text(RESULT_MESSAGE[result]);
+
+    $('.second-rsp-button').unbind("click");
   }
 
 });
