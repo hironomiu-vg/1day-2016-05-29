@@ -139,7 +139,9 @@ jQuery(function($){
   function when_lose() {
       your_lose += 1;
       winning_streak = 0;
-      MY_HP -= ENEMY_ATTACK
+      const damage = ENEMY_ATTACK
+      display_damage('#my_damage', damage)
+      MY_HP -= damage
       setProgressBar('#my_hp', 100 * MY_HP / MY_MAX_HP)
       if(MY_HP <= 0) {
         gameover(false)
@@ -149,7 +151,9 @@ jQuery(function($){
   function when_win() {
       your_win += 1;
       winning_streak += 1;
-      ENEMY_HP -= 10 + winning_streak*5
+      const damage = 10 + winning_streak*5
+      ENEMY_HP -= damage
+      display_damage('#enemy_damage', damage)
       setProgressBar('#enemy_hp',  100 * ENEMY_HP / ENEMY_MAX_HP)
       if(ENEMY_HP <= 0) {
         gameover(true)
@@ -159,6 +163,14 @@ jQuery(function($){
   function when_draw() {
     draw += 1;
     winning_streak = 0;
+  }
+
+  function display_damage(elem, damage) {
+    var $damage = $('<h4>').css('font-size', damage * 6).css('color', 'white').text(damage)
+    $(elem).append($damage)
+    setTimeout(function() {
+      $damage.fadeOut(1000)
+    }, 2000)
   }
 
   function gameover(if_win) {

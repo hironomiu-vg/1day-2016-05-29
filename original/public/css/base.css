@@ -23,3 +23,13 @@ body {
 	height: 100px;
 	width: auto;
 }
+
+.damage {
+	position: absolute;
+	top: 10px;
+	left: 200px;
+	h4 {
+		color: #fff;
+		font-size: 52px;
+	}
+}
