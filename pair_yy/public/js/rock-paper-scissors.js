@@ -51,6 +51,11 @@ jQuery(function($){
         $("#three_win").text(RESULT_TOTAL[1]+"連勝");
     }
   });
+  
+  $(document).ready(function(){
+    document.title = "rock-paper-scissors";
+    $("#page_title").text("rock-paper-scissors");
+  });
 
 
   function bobHand() {
