@@ -4,6 +4,9 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
+  var BOB_NEXT_HAND = HAND_TYPE[0];
+  var SHINGAN_ENALBE = false;
+
   $(function() {
       $.ajax({
           url: '/api/missions',
@@ -30,11 +33,30 @@ jQuery(function($){
 
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
+
+    if(SHINGAN_ENALBE) {
+      opponentHand = BOB_NEXT_HAND;
+    }
+
     var result = judge( $(this).attr("id"), opponentHand);
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
+    SHINGAN_ENALBE = false;
+  });
+
+  $("#shingan").click(function(){
+    SHINGAN_ENALBE = true;
+    BOB_NEXT_HAND = bobHand();
+    console.log(BOB_NEXT_HAND);
+    $("#kokoro").attr("src", "img/" + BOB_NEXT_HAND + ".png");
+    $("#kokoro").animate({ 
+        left:"1095px"
+    }, 1000 ).animate({
+        left:"-103px"
+    }, 0);
   });
 
   function bobHand() {
