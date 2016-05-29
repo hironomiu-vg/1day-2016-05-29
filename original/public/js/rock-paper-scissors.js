@@ -94,9 +94,11 @@ jQuery(function($){
                (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
                (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
+        shake($("#enemy_image"))
       when_win();
     }else {
       result = RESULT_CODE.LOSE;
+        shake($("#my_image"));
       when_lose();
     }
     html += '<td>' + RESULT_MESSAGE[result] + '</td>';
@@ -160,5 +162,31 @@ jQuery(function($){
       $this.addClass('progress-bar-danger')
     }
   }
+
+    function shake(image) {
+        var mvw=2; // 横揺れ　pxの値( 2 は　2pxの意味)
+        var mvh=2; // 縦揺れ　pxの値( 2 は　2pxの意味)
+        var tw=10; // 横揺れ時間 10は。0.01秒
+        var th=10; // 縦揺れ時間 10は。0.01秒
+        image.css({position: 'relative'});
+        image.stop()
+                .animate({left : mvw+'px'},tw)
+                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw+'px'},tw)
+                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw+'px'},tw)
+                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw+'px'},tw)
+                .animate({left : mvw*-1+'px'},tw)
+                // 縦揺れ 開始
+                .animate({top : mvh+'px'},th)
+                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh+'px'},th)
+                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh+'px'},th)
+                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh+'px'},th)
+                .animate({top : mvh*-1+'px'},th)
+        };
 
 });
