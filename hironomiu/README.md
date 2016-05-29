@@ -27,7 +27,9 @@ hello, git!
   - 修士です
 - 東京に住んでいます
 - お腹減りました
+
 - 2 回目
 
 # mochi
 - I love :sushi:.
+:beer:も大好きです！
