@@ -47,7 +47,11 @@ jQuery(function($){
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
     $("#total").text(RESULT_TOTAL[1]+"勝"+RESULT_TOTAL[2]+"敗"+RESULT_TOTAL[0]+"分け");
+    if((RESULT_TOTAL[1]) > 2 ){
+        $("#three_win").text(RESULT_TOTAL[1]+"連勝");
+    }
   });
+
 
   function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
