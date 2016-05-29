@@ -4,6 +4,8 @@ jQuery(function($){
   var RESULT_CODE = { ZERO : 0, WIN : 1, TWO : 2, };
   var RESULT_MESSAGE = [ "0点","You win!","2点" ];
 
+  var points = 0;
+
   $(function() {
       $.ajax({
           url: '/api/missions',
@@ -33,13 +35,29 @@ jQuery(function($){
     var TomHand = Hand();
     var result = judge( $(this).attr("id"), BobHand, TomHand);
 
+    if(result === RESULT_CODE.WIN){
+      points++;
+    }else if(result === RESULT_CODE.LOSE){
+      points--;
+    }
+
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + BobHand + ".png");
     $("#tomrspimg").attr("src", "img/" + TomHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
+    $("#points").text(points + "点");
+
+    if(points >= 5){
+      $("#link").show();
+    }else{
+      $("#link").hide();
+    }
   });
 
-  function Hand() {
+  $("#link").hide();
+
+  function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
   }
 
