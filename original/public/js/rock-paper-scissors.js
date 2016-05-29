@@ -22,6 +22,7 @@ jQuery(function($){
 
   $('#my_hp').text(MY_HP + ' HP')
   $('#enemy_hp').text(ENEMY_HP + ' HP')
+  $('#enemy_name').html('<b>' + ENEMY_NAME + '</b>')
 
   $('#enemy_image').attr('src', 'img/' + ENEMY_IMG).show()
   $('#my_image').attr('src', 'img/' + 'character.png').show()
