@@ -1,7 +1,7 @@
 NPM?=$(shell which npm)
 NODE?=$(shell which node)
 BOWER?=$(shell pwd)/node_modules/bower/bin/bower
-SERVER_PATH?=./original
+SERVER_PATH?=./TM
 install:
 	$(NPM) install
 	$(BOWER) install
