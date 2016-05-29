@@ -47,7 +47,7 @@ jQuery(function($){
 
     if(points >= 5){
       clearInterval(timerID);
-      $("#win").html('勝ち<br><a href="http://localhost:8888">トップに戻る</a>')
+      $("#win").html('勝ち<br><a href="/">トップに戻る</a>')
     }
   });
 
