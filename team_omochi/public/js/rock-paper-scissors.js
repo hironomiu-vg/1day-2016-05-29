@@ -10,6 +10,7 @@ jQuery(function($){
 
   var BOB_NEXT_HAND = HAND_TYPE[0];
   var SHINGAN_ENALBE = false;
+  var SHINGAN_NUM = 0;
 
   $(function() {
       $.ajax({
@@ -67,10 +68,26 @@ jQuery(function($){
   });
 
   $("#shingan").click(function(){
+
+    if( SHINGAN_ENALBE ) {
+        return;
+    }
+
     SHINGAN_ENALBE = true;
     BOB_NEXT_HAND = bobHand();
-    console.log(BOB_NEXT_HAND);
-    $("#kokoro").attr("src", "img/" + BOB_NEXT_HAND + ".png");
+
+    // 5回で心眼発生確率0.5になる
+    if(Math.random() < Math.exp(Math.log(0.5)/5*SHINGAN_NUM) ){
+        $("#kokoro").attr("src", "img/" + BOB_NEXT_HAND + ".png");
+        SHINGAN_NUM++;
+    } else {
+        if(Math.random() < 0.5){
+            $("#kokoro").attr("src", "img/beer.png");
+        } else {
+            $("#kokoro").attr("src", "img/sushi.png");
+        }
+    }
+
     $("#kokoro").animate({ 
         left:"1095px"
     }, 1000 ).animate({
