@@ -6,6 +6,11 @@ hello!!
 
 肉(牛、豚、鶏)好きです！
 
+# S-Shimotori
+
+hello, git!  
+:sushi:
+
 # agata
 - あがたです
 - 学生です
@@ -13,3 +18,6 @@ hello!!
 - 東京に住んでいます
 - お腹減りました
 - 2 回目
+
+# mochi
+- I love :sushi:.
