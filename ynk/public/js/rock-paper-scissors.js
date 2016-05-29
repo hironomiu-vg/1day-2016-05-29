@@ -4,6 +4,8 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
+  var record = [0, 0, 0];
+
   $(function() {
       $.ajax({
           url: '/api/missions',
@@ -29,12 +31,23 @@ jQuery(function($){
   });
 
   $(".rsp-btn").click(function(){
+    var myHand = $(this).attr("id");
     var opponentHand = bobHand();
-    var result = judge( $(this).attr("id"), opponentHand);
+    var result = judge( myHand, opponentHand);
+
+    record[result]++;
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+    $("#record").text(
+        record[RESULT_CODE.WIN] + "勝" +
+        record[RESULT_CODE.LOSE] + "敗" +
+        record[RESULT_CODE.DRAW] + "分け"
+    );
+    $("#history").append(
+      "<tr><td>" + myHand + "</td><td>" + opponentHand + "</td><td>" +
+      result + "</td></tr>");
   });
 
   function bobHand() {
