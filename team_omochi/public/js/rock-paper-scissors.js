@@ -17,7 +17,7 @@ jQuery(function($){
       }).always(function() {
       });
   });
-  
+
   $('#button').click(function(){
       $('#main').toggle(function(){
           if ($(this).is(':visible')) {
@@ -31,10 +31,27 @@ jQuery(function($){
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
+    var i,j,z;
+    // 引き分け
+    if(result == 0)
+    {
+      i++;
+    }
+    // 勝ち
+    if(result == 1)
+    {
+      j++;
+    }
+
+  // 　負け
+    if(result == 2)
+    {
+      z++
+    }
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
-    $("#result").text(RESULT_MESSAGE[result]);
+    $("#result").text(RESULT_MESSAGE[result],"引き分け："z, "勝ち："i, "負け："j, );
   });
 
   function bobHand() {
@@ -46,12 +63,15 @@ jQuery(function($){
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
-               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
+               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) ||
                (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
+
     }else {
       result = RESULT_CODE.LOSE;
+
     }
     return result;
+    ;
   }
 });
