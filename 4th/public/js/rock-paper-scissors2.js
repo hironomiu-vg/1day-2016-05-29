@@ -44,6 +44,11 @@ jQuery(function($){
     points += judge(myHand, TomHand);
 
     $("#result").text(points + "点");
+
+    if(points >= 5){
+      clearInterval(timerID);
+      $("#win").html('勝ち<br><a href="http://localhost:8888">トップに戻る</a>')
+    }
   });
 
   function Hand() {
