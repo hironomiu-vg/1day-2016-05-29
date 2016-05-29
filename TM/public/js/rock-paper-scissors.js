@@ -4,6 +4,10 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
+
+  var log = [0, 0, 0];
+
+
   $(function() {
       $.ajax({
           url: '/api/missions',
@@ -21,6 +25,7 @@ jQuery(function($){
   $('#button').click(function(){
       $('#main').toggle(function(){
           if ($(this).is(':visible')) {
+
               $('#button1').text('非表示');
           } else {
               $('#button1').text('表示');
@@ -34,6 +39,11 @@ jQuery(function($){
               $('#button1').text('非表示');
           } else {
               $('#button1').text('表示');
+
+              $('#button').text('非表示');
+          } else {
+              $('#button').text('表示');
+
           }
       });
   });
@@ -45,6 +55,13 @@ jQuery(function($){
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
+
+	log[result]++;
+	$("#log").text("draw:" + log[0] + ",win:" + log[1] + ",lose" + log[2]);
+	$("#log_detail").append("<li>You:"+ $(this).attr("id") +", Bob:"+ opponentHand +", Result:"+ RESULT_MESSAGE[result] +"</li>");
+
+
   });
 
   function bobHand() {
