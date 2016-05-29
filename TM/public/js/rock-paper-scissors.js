@@ -39,8 +39,8 @@ jQuery(function($){
     $("#result").text(RESULT_MESSAGE[result]);
 
 	log[result]++;
-	console.log(log);
 	$("#log").text("draw:" + log[0] + ",win:" + log[1] + ",lose" + log[2]);
+	$("#log_detail").append("<li>You:"+ $(this).attr("id") +", Bob:"+ opponentHand +", Result:"+ RESULT_MESSAGE[result] +"</li>");
 
   });
 
