@@ -59,8 +59,8 @@ jQuery(function($){
 
   var selected = [];
   var bobSelected = [];
-  var bobHP = 100;
-  var playerHP = 100;
+  var bobHP = 10;
+  var playerHP = 10;
 
   function setPlayerHP(n) {
     playerHP = n;
@@ -123,7 +123,7 @@ jQuery(function($){
     $("#second-button-area").empty();
     selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
-    setTimeout(setRspButtons, 0);
+    setTimeout(setRspButtons, 1000);
   }
 
   function selectStep() {
