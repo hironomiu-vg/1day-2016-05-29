@@ -25,10 +25,9 @@ jQuery(function($){
   $('#button').click(function(){
       $('#main').toggle(function(){
           if ($(this).is(':visible')) {
-
-              $('#button1').text('非表示');
+              $('#button').text('非表示');
           } else {
-              $('#button1').text('表示');
+              $('#button').text('表示');
           }
       });
   });
@@ -39,11 +38,6 @@ jQuery(function($){
               $('#button1').text('非表示');
           } else {
               $('#button1').text('表示');
-
-              $('#button').text('非表示');
-          } else {
-              $('#button').text('表示');
-
           }
       });
   });
