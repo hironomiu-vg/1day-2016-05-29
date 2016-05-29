@@ -35,3 +35,5 @@ hello, git!
 # mochi
 - I love :sushi:.
 :beer:も大好きです！
+
+闇のコンフリクト解消作業はデベロッパーの日常です
