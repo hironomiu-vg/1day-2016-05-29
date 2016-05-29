@@ -11,7 +11,8 @@ jQuery(function($){
   var winning_streak = 0;
 
   const random_var = Math.floor(Math.random()*4)
-  const ENEMY_NAME = ['キマイラ', 'メデューサ', 'ワイバーン', 'ウルフ'][random_var]
+  const ENEMY_NAME = ['キマイラ', 'メデューサ', 'ドラゴン', 'ウルフ'][random_var]
+  const ENEMY_IMG = {'キマイラ': 'khimaira.png', 'メデューサ': 'medusa.png', 'ドラゴン': 'dragon.png', 'ウルフ': 'wolf.png'}[ENEMY_NAME]
   const ENEMY_MAX_HP = [120, 100, 212, 180][random_var]
   var ENEMY_HP = ENEMY_MAX_HP
   const ENEMY_ATTACK = [21, 14, 41, 31][random_var]
@@ -20,6 +21,9 @@ jQuery(function($){
 
   $('#my_hp').text(MY_HP + ' HP')
   $('#enemy_hp').text(ENEMY_HP + ' HP')
+
+  $('#enemy_image').attr('src', 'img/' + ENEMY_IMG).show()
+  $('#my_image').attr('src', 'img/' + ENEMY_IMG).show()
 
   console.log(ENEMY_HP)
 

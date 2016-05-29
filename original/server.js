@@ -79,6 +79,26 @@ http.createServer(function(request, response) {
                     response.writeHead(200,{"Content-Type": "image/png"});
                     response.end( buf,'binary');
                     break;
+                case '/img/dragon.png':
+                    var buf = fs.readFileSync(__dirname + '/public/img/dragon.png','binary');
+                    response.writeHead(200,{"Content-Type": "image/png"});
+                    response.end( buf,'binary');
+                    break;
+                case '/img/khimaira.png':
+                    var buf = fs.readFileSync(__dirname + '/public/img/khimaira.png','binary');
+                    response.writeHead(200,{"Content-Type": "image/png"});
+                    response.end( buf,'binary');
+                    break;
+                case '/img/medusa.png':
+                    var buf = fs.readFileSync(__dirname + '/public/img/medusa.png','binary');
+                    response.writeHead(200,{"Content-Type": "image/png"});
+                    response.end( buf,'binary');
+                    break;
+                case '/img/wolf.png':
+                    var buf = fs.readFileSync(__dirname + '/public/img/wolf.png','binary');
+                    response.writeHead(200,{"Content-Type": "image/png"});
+                    response.end( buf,'binary');
+                    break;
                 case '/favicon.ico':
                     var buf = fs.readFileSync(__dirname + '/public/favicon.ico','binary');
                     response.writeHead(200,{"Content-Type": "image/x-icon"});
