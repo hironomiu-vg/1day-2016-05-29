@@ -29,7 +29,7 @@ jQuery(function($){
   });
 
   $(".rsp-btn").click(setRspOnClick);
-  $("#start").click(setRspButtons);
+  $("#start").click(onStart);
 
   function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
@@ -71,5 +71,10 @@ jQuery(function($){
   function setStartButton() {
     $("#button-area").empty();
     $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='start'>スタート</button> </div>").appendTo($("#button-area"));
+  }
+
+  function onStart() {
+    $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
+    setTimeout(setRspButtons, 1000);
   }
 });
