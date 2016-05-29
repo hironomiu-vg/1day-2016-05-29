@@ -3,6 +3,9 @@ jQuery(function($){
   var HAND_TYPE = [ "rock" , "scissors" , "paper" ];
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
+  var i=0,j=0,z=0;
+  var preri = 0
+  var enablematta = false;
 
   $(function() {
       $.ajax({
@@ -31,7 +34,8 @@ jQuery(function($){
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
-    var i,j,z;
+
+
     // 引き分け
     if(result == 0)
     {
@@ -49,10 +53,41 @@ jQuery(function($){
       z++
     }
 
+
+
+
+
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
-    $("#result").text(RESULT_MESSAGE[result],"引き分け："z, "勝ち："i, "負け："j, );
+    $("#result").text(RESULT_MESSAGE[result]);
+    $("#result2").text("引き分け：" + z );
+    $("#result3").text("勝ち：" + i );
+    $("#result4").text( "負け：" + j);
+    preri = result;
   });
+
+$(".rsv-btn").click(function matta(){
+if(enablematta){
+  return;
+}
+enablematta=true;
+  if(preri == 0)
+  {i--;}
+if(preri == 1)
+  {j--;}
+  if(preri == 2)
+  {z--;}
+
+
+
+
+    $("#result").text("stop!!");
+    $("#result2").text("引き分け：" + z );
+    $("#result3").text("勝ち：" + i );
+    $("#result4").text( "負け：" + j);
+
+  });
+
 
   function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
