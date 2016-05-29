@@ -6,3 +6,15 @@ body {
   max-height: 280px;
   overflow: scroll;
 }
+
+#own img{
+  height: 200px;
+  margin: 0 auto;
+  width: auto;
+}
+
+#enemy img {
+	height: 200px;
+	margin: 0 auto;
+	width: auto;
+}
