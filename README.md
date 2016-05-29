@@ -1,3 +1,4 @@
+# チーム爽健美茶 bicha-devブランチ
 # rock-paper-scissors-pair-programming
 
 ## 動作環境
