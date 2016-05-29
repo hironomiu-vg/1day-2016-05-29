@@ -3,6 +3,7 @@ jQuery(function($){
   var HAND_TYPE = [ "rock" , "scissors" , "paper" ];
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
+  var count = 0;
 
   $(function() {
     document.title = "rock-paper-scissors"; 
@@ -48,6 +49,7 @@ jQuery(function($){
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
   });
 
 
@@ -60,12 +62,18 @@ jQuery(function($){
     var result;
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
+      count = 0;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
      (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
      (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
+      count++;
+      if(count >= 3){
+        $("#streak").text(count+"連勝！");
+      }
     }else {
       result = RESULT_CODE.LOSE;
+      count = 0;
     }
     return result;
   }
