@@ -6,6 +6,14 @@ hello!!
 
 肉(牛、豚、鶏)好きです！
 
+# quartorz
+
+よく使う言語はC++です
+
+甘いものが好きです
+
+よろしくお願いします
+
 # S-Shimotori
 
 hello, git!  
