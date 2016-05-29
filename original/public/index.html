@@ -42,10 +42,17 @@
                             <hr /> 
                             <h1><strong><p id="result" class="text-center">Who will win?</p></strong></h1>
                             <div class="match_history" style="display:none">
-                                <span id="match_count">0戦</span>
-                                <span id="your_win">0勝</span>
-                                <span id="your_lose">0敗</span>
-                                <span id="draw">0引き分け</span>
+
+                                <div class="pull-left">
+                                    <span id="match_count">0戦</span>
+                                    <span id="your_win">0勝</span>
+                                    <span id="your_lose">0敗</span>
+                                    <span id="draw">0引き分け</span>
+                                </div>
+                                <div class="pull-right">
+                                    <span id="winning_streak">連勝</span>
+                                </div>
+                                <div class="clearfix" style="margin: 10px 0"></div>
                                 <div class="history-field">
                                 <table class="table table-striped" id="history">
                                     <thead>

@@ -8,6 +8,7 @@ jQuery(function($){
   var your_win = 0;
   var your_lose = 0;
   var draw = 0;
+  var winning_streak = 0;
 
   $(function() {
       $.ajax({
@@ -44,6 +45,12 @@ jQuery(function($){
     $("#your_win").text(your_win.toString() + '勝');
     $('#your_lose').text(your_lose.toString() + '敗')
     $('#draw').text(draw.toString() + '引き分け');
+    if(winning_streak > 3) {
+      $('#winning_streak').text(winning_streak.toString() + '連勝!!');
+      $('#winning_streak').show();
+    } else {
+      $('#winning_streak').hide();
+    }
     $("#result").text(RESULT_MESSAGE[result]);
   });
 
@@ -57,14 +64,17 @@ jQuery(function($){
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
       draw += 1;
+      winning_streak = 0;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
                (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
                (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
       your_win += 1;
+      winning_streak += 1;
     }else {
       result = RESULT_CODE.LOSE;
       your_lose += 1;
+      winning_streak = 0;
     }
     html += '<td>' + RESULT_MESSAGE[result] + '</td>';
     const $tr = $('<tr>').html(html);
