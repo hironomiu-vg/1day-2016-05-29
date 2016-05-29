@@ -3,7 +3,10 @@ jQuery(function($){
   var HAND_TYPE = [ "rock" , "scissors" , "paper" ];
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
-  var current_score = 1000;
+  var current_score = 0;
+  var will_get_score = 0;
+  var win_count = 0;
+  var before_result = RESULT_CODE['DRAW'];
 
   var BOB_NEXT_HAND = HAND_TYPE[0];
   var SHINGAN_ENALBE = false;
@@ -40,7 +43,16 @@ jQuery(function($){
     }
 
     var result = judge( $(this).attr("id"), opponentHand);
-    if (result != RESULT_CODE['LOSE']) {
+    switch(result) {
+    case RESULT_CODE['LOSE']:
+        current_score = 0;
+        will_get_score = 0;
+        break;
+    case RESULT_CODE['DRAW']:
+        break;
+    case RESULT_CODE['WIN']:
+        will_get_score = (will_get_score == 0 ? 100 : will_get_score * 2);
+        break;
     }
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
@@ -49,6 +61,7 @@ jQuery(function($){
     $(".game_hands").toggle(function() {
           
     });
+    $("#current_score").html("今の持ち点："+current_score+"<br/>勝ち点："+will_get_score);
 
     SHINGAN_ENALBE = false;
   });
@@ -67,12 +80,14 @@ jQuery(function($){
   });
   
   $(".score-btn").click(function() {
-      if ($(this).attr("id") == "down") {
-
-      }
-      $(".game_hands").toggle(function() {
-          
-      });
+    if ($(this).attr("id") == "down") {
+        current_score += will_get_score;
+        will_get_score = 0;
+        $("#current_score").html("今の持ち点："+current_score+"<br/>勝ち点："+will_get_score);
+    }
+    $(".game_hands").toggle(function() {
+        
+    });
   });
 
   function bobHand() {
