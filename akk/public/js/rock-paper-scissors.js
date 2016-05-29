@@ -62,6 +62,8 @@ jQuery(function($){
   var bobSelected = [];
   var bobHP = 10;
   var playerHP = 10;
+  var win_num = 0;
+  var lose_num = 0;
 
   function setPlayerHP(n) {
     playerHP = n;
@@ -70,6 +72,10 @@ jQuery(function($){
   }
 
   function decPlayerHP() {
+    if (playerHP == 1) {
+      alert("You lose!!");
+      location.reload();
+    }
     setPlayerHP(playerHP - 1);
   }
 
@@ -83,6 +89,10 @@ jQuery(function($){
   }
 
   function decBobHP() {
+    if (bobHP == 1) {
+      alert("You win!!");
+      location.reload();
+    }
     setBobHP(bobHP - 1);
   }
 
@@ -92,9 +102,16 @@ jQuery(function($){
 
   function setRspOnClick() {
     $(".rsp-btn").click(function() {
+      var bobselect_num = 2;
+      var playerselect_num = 2;
+      if (lose_num >= 2) {
+        bobselect_num = 1;
+      } else if (win_num >= 2) {
+        playerselect_num = 1;
+      }
+      bobSelected = bobHands(bobselect_num);
       selected.push($(this).attr("id"));
-      if (selected.length == 2) {
-        bobSelected = bobHands(2);
+      if (selected.length == playerselect_num) {
         selectStep();
         return;
       }
@@ -121,9 +138,24 @@ jQuery(function($){
   }
 
   function onStart() {
+    $("#notification").text("");
     $("#second-button-area").empty();
     selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
+    $("#notification").text("");
+    var notification = "";
+    if (lose_num >= 2) {
+      notification += "劣勢!! ボブは一種類しか選べません...";
+    } else if (win_num >= 2) {
+      notification += "優勢!! あなたは一種類しか選べません...";
+    }
+    if (playerHP < 5) {
+      notification += "ピンチ! パワーアップ!!";
+    }
+    if (bobHP < 5) {
+      notification += "ボブがパワーアップ!!";
+    }
+    $("#notification").text(notification);
     setTimeout(setRspButtons, 1000);
   }
 
@@ -154,9 +186,19 @@ jQuery(function($){
     switch (result) {
       case RESULT_CODE.WIN:
         decBobHP();
+        if (playerHP < 5) {
+          decBobHP();
+        }
+        win_num++;
+        lose_num = 0;
         break;
       case RESULT_CODE.LOSE:
         decPlayerHP();
+        if (bobHP < 5) {
+          decPlayerHP();
+        }
+        win_num = 0;
+        lose_num++;
         break;
       case RESULT_CODE.DRAW:
         break;
