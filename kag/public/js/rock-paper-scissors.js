@@ -4,6 +4,10 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
+  var win = 0;
+  var lose = 0;
+  var draw = 0;
+
   $(function() {
       $.ajax({
           url: '/api/missions',
@@ -32,9 +36,18 @@ jQuery(function($){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
 
+    if (result == RESULT_CODE.DRAW) {
+      draw++;
+    } else if (result == RESULT_CODE.WIN) {
+      win++;
+    } else if (result == RESULT_CODE.LOSE) {
+      lose++;
+    }
+
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+    $("#record").text(win + " 勝 " + lose + " 敗 " + draw + " 分け ");
   });
 
   function bobHand() {
