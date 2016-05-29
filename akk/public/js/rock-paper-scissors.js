@@ -28,6 +28,7 @@ jQuery(function($){
       });
   });
 
+ 
   $(".rsp-btn").click(setRspOnClick);
   $("#start").click(onStart);
 
@@ -59,12 +60,58 @@ jQuery(function($){
 
   var selected = [];
   var bobSelected = [];
+  var bobHP = 10;
+  var playerHP = 10;
+  var win_num = 0;
+  var lose_num = 0;
+
+  function setPlayerHP(n) {
+    playerHP = n;
+    console.log(n);
+    $("#playerHP").text("Your HP: " + playerHP);
+  }
+
+  function decPlayerHP() {
+    if (playerHP == 1) {
+      alert("You lose!!");
+      location.reload();
+    }
+    setPlayerHP(playerHP - 1);
+  }
+
+  function incPlayerHP() {
+    setPlayerHP(playerHP + 1);
+  }
+
+  function setBobHP(n) {
+    bobHP = n;
+    $("#bobHP").text("Bob's HP: " + bobHP);
+  }
+
+  function decBobHP() {
+    if (bobHP == 1) {
+      alert("You win!!");
+      location.reload();
+    }
+    setBobHP(bobHP - 1);
+  }
+
+  function incBobHP() {
+    setBobHP(bobHP + 1);
+  }
 
   function setRspOnClick() {
     $(".rsp-btn").click(function() {
+      var bobselect_num = 2;
+      var playerselect_num = 2;
+      if (lose_num >= 2) {
+        bobselect_num = 1;
+      } else if (win_num >= 2) {
+        playerselect_num = 1;
+      }
+      bobSelected = bobHands(bobselect_num);
       selected.push($(this).attr("id"));
-      if (selected.length == 2) {
-        bobSelected = bobHands(2);
+      if (selected.length == playerselect_num) {
         selectStep();
         return;
       }
@@ -91,24 +138,38 @@ jQuery(function($){
   }
 
   function onStart() {
+    $("#notification").text("");
     $("#second-button-area").empty();
     selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
-    setTimeout(setRspButtons, 0);
+    $("#notification").text("");
+    var notification = "";
+    if (lose_num >= 2) {
+      notification += "劣勢!! ボブは一種類しか選べません...";
+    } else if (win_num >= 2) {
+      notification += "優勢!! あなたは一種類しか選べません...";
+    }
+    if (playerHP < 5) {
+      notification += "ピンチ! パワーアップ!!";
+    }
+    if (bobHP < 5) {
+      notification += "ボブがパワーアップ!!";
+    }
+    $("#notification").text(notification);
+    setTimeout(setRspButtons, 1000);
   }
 
   function selectStep() {
     var p = $("#second-button-area");
     p.empty();
-    var myhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
+    var myhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>あなた</h4></div>");
     for (var i = 0; i < selected.length ; i++) {
-      $("<h4>あなた</h4><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
+      $("<h4/><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
     }
     myhand.appendTo(p);
-    console.log(bobSelected);
-    var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
+    var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>ボブ</h4></div>");
     for (var i = 0; i < bobSelected.length ; i++) {
-      $("<h4>ボブ</h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
+      $("<h4></h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
     }
     bobhand.appendTo(p);
     $('.second-rsp-button').click(onSecondSelect);
@@ -121,6 +182,27 @@ jQuery(function($){
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + bob + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
+    switch (result) {
+      case RESULT_CODE.WIN:
+        decBobHP();
+        if (playerHP < 5) {
+          decBobHP();
+        }
+        win_num++;
+        lose_num = 0;
+        break;
+      case RESULT_CODE.LOSE:
+        decPlayerHP();
+        if (bobHP < 5) {
+          decPlayerHP();
+        }
+        win_num = 0;
+        lose_num++;
+        break;
+      case RESULT_CODE.DRAW:
+        break;
+    }
 
     $('.second-rsp-button').unbind("click");
   }
