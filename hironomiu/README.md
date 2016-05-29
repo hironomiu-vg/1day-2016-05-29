@@ -5,3 +5,8 @@ hello!!
 2016-05-29
 
 肉(牛、豚、鶏)好きです！
+
+#taiju
+hi.
+my name is teeee
+please call me teee
