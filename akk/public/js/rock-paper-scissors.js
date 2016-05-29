@@ -35,6 +35,14 @@ jQuery(function($){
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
   }
 
+  function bobHands(n) {
+    var res = [];
+    for (var i = 0; i < n; i++) {
+      res.push(HAND_TYPE[Math.floor(Math.random() * 3)]);
+    }
+    return res;
+  }
+
   function judge(myHand, opponentHand) {
     var result;
     if (myHand === opponentHand) {
@@ -49,14 +57,21 @@ jQuery(function($){
     return result;
   }
 
+  var selected = [];
+
   function setRspOnClick() {
     $(".rsp-btn").click(function() {
-      var opponentHand = bobHand();
-      var result = judge( $(this).attr("id"), opponentHand);
+      selected.push($(this).attr("id"));
+      if (selected.length == 2) {
+        var opponentHands = bobHands(2);
+        selectStep(selected, opponentHands);
+        return;
+      }
+      // var result = judge( $(this).attr("id"), opponentHand);
 
-      $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
-      $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
-      $("#result").text(RESULT_MESSAGE[result]);
+      // $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
+      // $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
+      // $("#result").text(RESULT_MESSAGE[result]);
     });
   }
 
@@ -70,11 +85,32 @@ jQuery(function($){
 
   function setStartButton() {
     $("#button-area").empty();
-    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='start'>スタート</button> </div>").appendTo($("#button-area"));
+    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary' id='start'>スタート</button> </div>").appendTo($("#button-area"));
+    $("#start").click(onStart);
   }
 
   function onStart() {
+    console.log("hoge");
+    $("#second-button-area").empty();
+    selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
     setTimeout(setRspButtons, 1000);
   }
+
+  function selectStep(selected, cpuSelected) {
+    var p = $("#second-button-area");
+    p.empty();
+    var myhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
+    for (var i = 0; i < selected.length ; i++) {
+      $("<h4>あなた</h4><img id='myrspimg' src='img/" + selected[i] + ".png' />").appendTo(myhand);
+    }
+    myhand.appendTo(p);
+    console.log(cpuSelected);
+    var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
+    for (var i = 0; i < cpuSelected.length ; i++) {
+      $("<h4>ボブ</h4><img id='myrspimg' src='img/" + cpuSelected[i] + ".png' />").appendTo(bobhand);
+    }
+    bobhand.appendTo(p);
+  }
+
 });
