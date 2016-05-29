@@ -18,13 +18,22 @@ jQuery(function($){
       }).always(function() {
       });
   });
-  
+
   $('#button').click(function(){
-      $('#main').toggle(function(){
+      $('#side-menu').toggle(function(){
           if ($(this).is(':visible')) {
               $('#button').text('非表示');
           } else {
               $('#button').text('表示');
+          }
+      });
+  });
+  $('#side-button').click(function(){
+      $('#side-menu').toggle(function(){
+          if ($(this).is(':visible')) {
+              $('#side-button').text('非表示');
+          } else {
+              $('#side-button').text('表示');
           }
       });
   });
@@ -49,7 +58,7 @@ jQuery(function($){
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
-               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
+               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) ||
                (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
     }else {
