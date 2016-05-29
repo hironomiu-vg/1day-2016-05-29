@@ -11,6 +11,8 @@ hello!!
 hello, git!  
 :sushi:
 
+サーモンが好きです
+
 # agata
 - あがたです
 - 学生です
