@@ -100,15 +100,15 @@ jQuery(function($){
   function selectStep() {
     var p = $("#second-button-area");
     p.empty();
-    var myhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
+    var myhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>あなた</h4></div>");
     for (var i = 0; i < selected.length ; i++) {
-      $("<h4>あなた</h4><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
+      $("<h4/><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
     }
     myhand.appendTo(p);
     console.log(bobSelected);
-    var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'/>");
+    var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>ボブ</h4></div>");
     for (var i = 0; i < bobSelected.length ; i++) {
-      $("<h4>ボブ</h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
+      $("<h4></h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
     }
     bobhand.appendTo(p);
     $('.second-rsp-button').click(onSecondSelect);
