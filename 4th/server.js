@@ -71,6 +71,13 @@ http.createServer(function(request, response) {
                         response.end();
                     });
                     break;
+                case '/js/rock-paper-scissors2.js':
+                    fs.readFile(__dirname + '/public/js/rock-paper-scissors2.js', 'UTF-8', function(err, data) {
+                        response.writeHead(200, {"Content-Type": "application/javascript"});
+                        response.write(data);
+                        response.end();
+                    });
+                    break;
                 case '/img/rock.png':
                     var buf = fs.readFileSync(__dirname + '/public/img/rock.png','binary');
                     response.writeHead(200,{"Content-Type": "image/png"});
