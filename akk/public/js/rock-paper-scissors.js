@@ -59,6 +59,35 @@ jQuery(function($){
 
   var selected = [];
   var bobSelected = [];
+  var bobHP = 100;
+  var playerHP = 100;
+
+  function setPlayerHP(n) {
+    playerHP = n;
+    console.log(n);
+    $("#playerHP").text("Your HP: " + playerHP);
+  }
+
+  function decPlayerHP() {
+    setPlayerHP(playerHP - 1);
+  }
+
+  function incPlayerHP() {
+    setPlayerHP(playerHP + 1);
+  }
+
+  function setBobHP(n) {
+    bobHP = n;
+    $("#bobHP").text("Bob's HP: " + bobHP);
+  }
+
+  function decBobHP() {
+    setBobHP(bobHP - 1);
+  }
+
+  function incBobHP() {
+    setBobHP(bobHP + 1);
+  }
 
   function setRspOnClick() {
     $(".rsp-btn").click(function() {
@@ -105,7 +134,6 @@ jQuery(function($){
       $("<h4/><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
     }
     myhand.appendTo(p);
-    console.log(bobSelected);
     var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>ボブ</h4></div>");
     for (var i = 0; i < bobSelected.length ; i++) {
       $("<h4></h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
@@ -121,6 +149,17 @@ jQuery(function($){
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + bob + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
+    switch (result) {
+      case RESULT_CODE.WIN:
+        decBobHP();
+        break;
+      case RESULT_CODE.LOSE:
+        decPlayerHP();
+        break;
+      case RESULT_CODE.DRAW:
+        break;
+    }
 
     $('.second-rsp-button').unbind("click");
   }
