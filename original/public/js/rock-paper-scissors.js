@@ -167,6 +167,9 @@ jQuery(function($){
     } else {
       alert('lose!');
     }
+    setTimeout(function() {
+      window.location.reload();
+    }, 2000);
   }
 
   function setProgressBar(elem, hp) {
@@ -196,22 +199,22 @@ jQuery(function($){
         image.css({position: 'relative'});
         image.stop()
                 .animate({left : mvw+'px'},tw)
-                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw*-5+'px'},tw)
                 .animate({left : mvw+'px'},tw)
-                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw*-5+'px'},tw)
                 .animate({left : mvw+'px'},tw)
-                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw*-5+'px'},tw)
                 .animate({left : mvw+'px'},tw)
-                .animate({left : mvw*-1+'px'},tw)
+                .animate({left : mvw*-5+'px'},tw)
                 // 縦揺れ 開始
                 .animate({top : mvh+'px'},th)
-                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh*-5+'px'},th)
                 .animate({top : mvh+'px'},th)
-                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh*-5+'px'},th)
                 .animate({top : mvh+'px'},th)
-                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh*-5+'px'},th)
                 .animate({top : mvh+'px'},th)
-                .animate({top : mvh*-1+'px'},th)
+                .animate({top : mvh*-5+'px'},th)
         };
 
 });
