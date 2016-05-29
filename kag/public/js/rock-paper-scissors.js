@@ -28,6 +28,16 @@ jQuery(function($){
       });
   });
 
+  $('#button-spec').click(function(){
+      $('#spec').toggle(function(){
+          if ($(this).is(':visible')) {
+              $('#button-spec').text('非表示');
+          } else {
+              $('#button-spec').text('表示');
+          }
+      });
+  });
+
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
