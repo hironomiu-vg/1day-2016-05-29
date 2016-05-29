@@ -58,7 +58,7 @@ jQuery(function($){
     $("#your_win").text(your_win.toString() + '勝');
     $('#your_lose').text(your_lose.toString() + '敗')
     $('#draw').text(draw.toString() + '引き分け');
-    if(winning_streak > 3) {
+    if(winning_streak >= 3) {
       $('#winning_streak').text(winning_streak.toString() + '連勝!!');
       $('#winning_streak').show();
     } else {
