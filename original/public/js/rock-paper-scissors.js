@@ -28,7 +28,15 @@ jQuery(function($){
       });
   });
 
+    $("#start").click(function(){
+        $(this).prop("disabジャーンケーんled", true);
+        $(".rsp-btn").prop("disabled", false);
+        $("#result").text("じゃーんけーん");
+    });
+
   $(".rsp-btn").click(function(){
+      $(".rsp-btn").prop("disabled", true);
+      $("#start").prop("disabled", false);
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
 
