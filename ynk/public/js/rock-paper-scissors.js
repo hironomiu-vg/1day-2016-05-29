@@ -5,6 +5,7 @@ jQuery(function($){
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
   var record = [0, 0, 0];
+  var winCount = 0;
 
   $(function() {
       $.ajax({
@@ -37,6 +38,12 @@ jQuery(function($){
 
     record[result]++;
 
+    if(result === RESULT_CODE.WIN){
+      winCount++;
+    }else{
+      winCount = 0;
+    }
+
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
@@ -45,6 +52,9 @@ jQuery(function($){
         record[RESULT_CODE.LOSE] + "敗" +
         record[RESULT_CODE.DRAW] + "分け"
     );
+    if(winCount >= 3){
+      $("#record").append(" " + winCount + "連勝！！");
+    }
     $("#history").append(
       "<tr><td>" + myHand + "</td><td>" + opponentHand + "</td><td>" +
       result + "</td></tr>");
