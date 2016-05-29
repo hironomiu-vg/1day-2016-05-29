@@ -11,6 +11,13 @@ http.createServer(function(request, response) {
                         response.end();
                     });
                     break;
+                case '/index2':
+                    fs.readFile(__dirname + '/public/index2.html', 'UTF-8', function(err, data) {
+                        response.writeHead(200, {"Content-Type": "text/html"});
+                        response.write(data);
+                        response.end();
+                    });
+                    break;
                 case '/api/missions':
                     if (request.headers['x-requested-with'] == "XMLHttpRequest") {
                         response.writeHead(200, {"Content-Type": "application/json"});
@@ -20,7 +27,7 @@ http.createServer(function(request, response) {
                         response.writeHead(400, {"Content-Type": "application/json"});
                         response.write(JSON.stringify('{"message":"bad request"}'));
                         response.end();
-                    } 
+                    }
                     break;
                 case '/bower_components/bootstrap/dist/css/bootstrap.css':
                     fs.readFile(__dirname + '/public/bower_components/bootstrap/dist/css/bootstrap.css', 'UTF-8', function(err, data) {
