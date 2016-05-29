@@ -29,7 +29,10 @@ body {
 	top: 10px;
 	left: 200px;
 	h4 {
-		color: #fff;
 		font-size: 52px;
+-webkit-text-stroke-color: #000;
+-webkit-text-stroke-width: 4px;
+text-shadow: black 2px 2px 0px, black -2px 2px 0px,
+             black 2px -2px 0px, black -2px -2px 0px;
 	}
 }

@@ -166,11 +166,11 @@ jQuery(function($){
   }
 
   function display_damage(elem, damage) {
-    var $damage = $('<h4>').css('font-size', damage * 6).css('color', 'white').text(damage)
+    var $damage = $('<h4>').css('font-size', damage * 6).css('color', 'white').css('-webkit-text-stroke', '2px #000').text(damage)
     $(elem).append($damage)
     setTimeout(function() {
       $damage.fadeOut(1000)
-    }, 2000)
+    }, 1000)
   }
 
   function gameover(if_win) {
