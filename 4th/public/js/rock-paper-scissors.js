@@ -4,6 +4,8 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
+  var winCount = 0;
+
   $(function() {
       $.ajax({
           url: '/api/missions',
@@ -32,10 +34,24 @@ jQuery(function($){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
 
+    if(result === RESULT_CODE.WIN){
+      winCount++;
+    }else{
+      winCount = 0;
+    }
+
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+
+    if(winCount >= 2){
+      $("#link").show();
+    }else{
+      $("#link").hide();
+    }
   });
+
+  $("#link").hide();
 
   function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
