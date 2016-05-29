@@ -10,10 +10,6 @@ jQuery(function($){
   var draw = 0;
   var winning_streak = 0;
 
-  setTimeout(function() {
-    $('#title').text('rock-paper-scissors');
-  }, 2000);
-
   $(function() {
       $.ajax({
           url: '/api/missions',
