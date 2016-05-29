@@ -17,7 +17,10 @@ jQuery(function($){
           alert("データ取得失敗");
       }).always(function() {
       });
+      $("#hand-buttons").hide();
   });
+
+  $('#start').click(onStart);
   
   $('#button').click(function(){
       $('#main').toggle(function(){
@@ -65,5 +68,22 @@ jQuery(function($){
       result = RESULT_CODE.LOSE;
     }
     return result;
+  }
+
+  function onStart() {
+    $("<h1><strong><p id='result' class='text-center'>じゃーんけーん</p></strong></h1>").appendTo($("#start-area"));;
+    setTimeout(makeHandBtn, 1000);
+  }
+
+  function makeHandBtn() {
+    $("#start-area").html($(" <div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='rock'>グー　</button> </div> <div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='scissors'>チョキ</button> </div> <div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='paper'>パー　</button> </div>"));
+  }
+
+  function makeStartBtn(parent) {
+    $("<button>", {
+      "class": "btn-lg btn-primary",
+      text: "Start",
+      click: onStart
+    }).appendTo(parent);
   }
 });
