@@ -4,7 +4,7 @@ jQuery(function($){
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
-  var winCount = 0;
+  var points = 0;
 
   $(function() {
       $.ajax({
@@ -35,16 +35,18 @@ jQuery(function($){
     var result = judge( $(this).attr("id"), opponentHand);
 
     if(result === RESULT_CODE.WIN){
-      winCount++;
-    }else{
-      winCount = 0;
+      points++;
+    }else if(result === RESULT_CODE.LOSE){
+      points--;
     }
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
 
-    if(winCount >= 2){
+    $("#points").text(points + "点");
+
+    if(points >= 5){
       $("#link").show();
     }else{
       $("#link").hide();
