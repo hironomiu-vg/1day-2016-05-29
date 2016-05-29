@@ -18,8 +18,8 @@ jQuery(function($){
       });
   });
   
-  $('#button').click(function(){
-      $('#main').toggle(function(){
+  $('.button').click(function(){
+      $(this).next().toggle(function(){
           if ($(this).is(':visible')) {
               $('#button').text('非表示');
           } else {
