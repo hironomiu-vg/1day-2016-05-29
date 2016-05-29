@@ -17,7 +17,7 @@ jQuery(function($){
       }).always(function() {
       });
   });
-  
+
   $('#button').click(function(){
       $('#main').toggle(function(){
           if ($(this).is(':visible')) {
@@ -46,7 +46,7 @@ jQuery(function($){
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
-               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
+               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) ||
                (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
     }else {
