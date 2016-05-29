@@ -1,6 +1,6 @@
 # hironomiu
 
-hello!!
+helloあいうえお!!
 
 2016-05-29
 
