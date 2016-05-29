@@ -2,7 +2,7 @@
 
 hello!!
 
-2016-05-29
+2016-05-29aaaaaaaaaaaaaa
 
 肉(牛、豚)好きです！
 爽健美茶好きです！
@@ -19,7 +19,7 @@ hello!!
 
 # S-Shimotori
 
-hello, git!  
+hello, git!
 :sushi:
 
 サーモンが好きです
