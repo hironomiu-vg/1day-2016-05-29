@@ -3,6 +3,7 @@ jQuery(function($){
   var HAND_TYPE = [ "rock" , "scissors" , "paper" ];
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
+  var current_score = 1000;
 
   $(function() {
       $.ajax({
@@ -31,10 +32,24 @@ jQuery(function($){
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
+    if (result != RESULT_CODE['LOSE']) {
+    }
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+    $(".game_hands").toggle(function() {
+          
+    });
+  });
+  
+  $(".score-btn").click(function() {
+      if ($(this).attr("id") == "down") {
+
+      }
+      $(".game_hands").toggle(function() {
+          
+      });
   });
 
   function bobHand() {
