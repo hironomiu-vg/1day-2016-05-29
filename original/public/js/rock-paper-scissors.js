@@ -34,15 +34,16 @@ jQuery(function($){
       });
   });
 
-    $("#start").click(function(){
-        $(this).prop("disabジャーンケーんled", true);
-        $(".rsp-btn").prop("disabled", false);
-        $("#result").text("じゃーんけーん");
-    });
+  $("#start").click(function(){
+      $(this).prop("disabled", true);
+      $('.rsp-btn').each(function(i, elem) {
+        $(elem).prop('disabled', false);
+      });
+      $("#result").text("じゃーんけーん");
+      $(this).fadeOut();
+  });
 
   $(".rsp-btn").click(function(){
-      $(".rsp-btn").prop("disabled", true);
-      $("#start").prop("disabled", false);
     var opponentHand = bobHand();
     var result = judge( $(this).attr("id"), opponentHand);
 
