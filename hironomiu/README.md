@@ -14,4 +14,4 @@ hello!!
 - お腹減りました
 
 # mochi
-- I love :sushi:.
+- I hate :sushi:.
