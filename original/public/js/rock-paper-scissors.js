@@ -1,8 +1,13 @@
 jQuery(function($){
   "use strict";
   var HAND_TYPE = [ "rock" , "scissors" , "paper" ];
+  var HAND_NAME = { rock: 'グー', scissors: 'チョキ', paper: 'パー'};
   var RESULT_CODE = { DRAW : 0, WIN : 1, LOSE : 2, };
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
+
+  var your_win = 0;
+  var your_lose = 0;
+  var draw = 0;
 
   $(function() {
       $.ajax({
@@ -34,6 +39,11 @@ jQuery(function($){
 
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
+    $('.match_history').fadeIn(500);
+    $('#match_count').text((your_win + your_lose + draw).toString() + '戦')
+    $("#your_win").text(your_win.toString() + '勝');
+    $('#your_lose').text(your_lose.toString() + '敗')
+    $('#draw').text(draw.toString() + '引き分け');
     $("#result").text(RESULT_MESSAGE[result]);
   });
 
@@ -42,16 +52,23 @@ jQuery(function($){
   }
 
   function judge(myHand, opponentHand) {
+    var html = '<td>' + HAND_NAME[myHand] + '</td><td>' + HAND_NAME[opponentHand] + '</td>';
     var result;
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
+      draw += 1;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
                (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
                (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
+      your_win += 1;
     }else {
       result = RESULT_CODE.LOSE;
+      your_lose += 1;
     }
+    html += '<td>' + RESULT_MESSAGE[result] + '</td>';
+    const $tr = $('<tr>').html(html);
+    $('#history').append($tr);
     return result;
   }
 });
