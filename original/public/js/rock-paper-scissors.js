@@ -12,9 +12,14 @@ jQuery(function($){
 
   const random_var = Math.floor(Math.random()*4)
   const ENEMY_NAME = ['キマイラ', 'メデューサ', 'ワイバーン', 'ウルフ'][random_var]
-  var ENEMY_HP = [120, 100, 212, 180][random_var]
+  const ENEMY_MAX_HP = [120, 100, 212, 180][random_var]
+  var ENEMY_HP = ENEMY_MAX_HP
   const ENEMY_ATTACK = [21, 14, 41, 31][random_var]
-  var MY_HP = 100 + random_var * 14
+  const MY_MAX_HP = 100 + random_var * 14
+  var MY_HP = MY_MAX_HP
+
+  $('#my_hp').text(MY_HP + ' HP')
+  $('#enemy_hp').text(ENEMY_HP + ' HP')
 
   console.log(ENEMY_HP)
 
@@ -104,6 +109,7 @@ jQuery(function($){
       your_lose += 1;
       winning_streak = 0;
       MY_HP -= ENEMY_ATTACK
+      setProgressBar('#my_hp', 100 * MY_HP / MY_MAX_HP)
       if(MY_HP <= 0) {
         gameover(false)
       }
@@ -113,6 +119,7 @@ jQuery(function($){
       your_win += 1;
       winning_streak += 1;
       ENEMY_HP -= 10 + winning_streak*5
+      setProgressBar('#enemy_hp',  100 * ENEMY_HP / ENEMY_MAX_HP)
       if(ENEMY_HP <= 0) {
         gameover(true)
       }
@@ -128,6 +135,25 @@ jQuery(function($){
       alert('win!');
     } else {
       alert('lose!');
+    }
+  }
+
+  function setProgressBar(elem, hp) {
+    hp = parseInt(hp, 10)
+    if(hp < 0) hp = 0;
+    const $this = $(elem)
+    $this.attr('aria-valuenow', hp)
+    $this.css('width', hp.toString() + '%')
+    $this.text(hp.toString() + 'HP')
+
+    if(hp < 60) {
+      $this.removeClass('progress-bar-success')
+      $this.addClass('progress-bar-warning')
+      $this.removeClass('progress-bar-danger')      
+    } else if(hp < 20) {
+      $this.removeClass('progress-bar-success')
+      $this.removeClass('progress-bar-warning')
+      $this.addClass('progress-bar-danger')
     }
   }
 
