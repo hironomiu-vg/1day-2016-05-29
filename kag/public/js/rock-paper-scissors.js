@@ -5,28 +5,30 @@ jQuery(function($){
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
   $(function() {
-    document.title = "rock-paper-scissors"  
-      $.ajax({
-          url: '/api/missions',
-          type: 'GET',
-          dataType: 'json'
-      }).done(function(json, statusText, jqXHR) {
-          var data = $.parseJSON(json);
-          $(".mission1").append("<li>" + data.mission + "</li>");
-      }).fail(function(jqXHR, statusText, errorThrown) {
-          alert("データ取得失敗");
-      }).always(function() {
-      });
+    document.title = "rock-paper-scissors"; 
+    $("#title").text("rock-paper-scissors");
+    
+    $.ajax({
+      url: '/api/missions',
+      type: 'GET',
+      dataType: 'json'
+    }).done(function(json, statusText, jqXHR) {
+      var data = $.parseJSON(json);
+      $(".mission1").append("<li>" + data.mission + "</li>");
+    }).fail(function(jqXHR, statusText, errorThrown) {
+      alert("データ取得失敗");
+    }).always(function() {
+    });
   });
   
   $('#button').click(function(){
-      $('#main').toggle(function(){
-          if ($(this).is(':visible')) {
-              $('#button').text('非表示');
-          } else {
-              $('#button').text('表示');
-          }
-      });
+    $('#main').toggle(function(){
+      if ($(this).is(':visible')) {
+        $('#button').text('非表示');
+      } else {
+        $('#button').text('表示');
+      }
+    });
   });
 
   $(".rsp-btn").click(function(){
@@ -38,6 +40,7 @@ jQuery(function($){
     $("#result").text(RESULT_MESSAGE[result]);
   });
 
+
   function bobHand() {
 
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
@@ -48,8 +51,8 @@ jQuery(function($){
     if (myHand === opponentHand) {
       result = RESULT_CODE.DRAW;
     } else if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
-               (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
-               (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
+     (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) || 
+     (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
       result = RESULT_CODE.WIN;
     }else {
       result = RESULT_CODE.LOSE;
