@@ -25,7 +25,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-6 col-md-6">
-                    <div class="text-center" style="height:300px"> <h4>Enemy</h4><img id="bobrspimg" src="img/scissors.png" /> </div>
+                    <div class="text-center" style="height:300px"> 
+                        <h4>Enemy</h4>
+                        <img id="bobrspimg" class="janken" src="img/scissors.png" /> 
+                    </div>
+                    <div id='zone'>
+
+                    </div>
                     <div id='own' class="text-center" style="height:200px;padding:5px;margin-bottom: 20px">
                         <img id='my_image' src='' style='display: none'>
                     </div>
@@ -48,13 +54,18 @@
                     <div class="col-sm-12 col-xs-12"> <hr /> </div>
                     <div class="col-sm-6 col-xs-6 text-center"> 
                         <h4>あなた</h4>
-                        <img id="myrspimg" src="img/rock.png" />
+                        <img id="myrspimg" class="janken" src="img/rock.png" />
                         <br>
                     </div>
-                    <div class="text-center">
-                        <div class="col-sm-4 col-xs-4"> <button type="button" class="btn-lg btn-primary rsp-btn" id="rock">グー　</button> </div>
-                        <div class="col-sm-4 col-xs-4"> <button type="button" class="btn-lg btn-primary rsp-btn" id="scissors">チョキ</button> </div>
-                        <div class="col-sm-4 col-xs-4"> <button type="button" class="btn-lg btn-primary rsp-btn" id="paper">パー　</button> </div>
+                    <div class="col-sm-6 col-xs-6 text-center" style="padding:40px">
+                        <button type="button" class="btn-lg btn-success" id="start">戦闘する</button>
+                    </div>
+                    <div class="col-xs-12" style="margin-top: 50px">
+                        <div class="text-center">
+                            <div class="col-sm-4 col-xs-4"> <button type="button" class="btn-lg btn-primary rsp-btn" id="rock" disabled="true">グー　</button> </div>
+                            <div class="col-sm-4 col-xs-4"> <button type="button" class="btn-lg btn-primary rsp-btn" id="scissors" disabled="true">チョキ</button> </div>
+                            <div class="col-sm-4 col-xs-4"> <button type="button" class="btn-lg btn-primary rsp-btn" id="paper" disabled="true">パー　</button> </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-xs-12">

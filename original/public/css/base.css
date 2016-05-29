@@ -18,3 +18,8 @@ body {
 	margin: 0 auto;
 	width: auto;
 }
+
+.janken {
+	height: 100px;
+	width: auto;
+}

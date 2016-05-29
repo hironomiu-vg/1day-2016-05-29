@@ -9,6 +9,7 @@ jQuery(function($){
   var your_lose = 0;
   var draw = 0;
   var winning_streak = 0;
+  var timer, index;
 
   const random_var = Math.floor(Math.random()*4)
   const ENEMY_NAME = ['キマイラ', 'メデューサ', 'ドラゴン', 'ウルフ'][random_var]
@@ -53,12 +54,27 @@ jQuery(function($){
 
   $("#start").click(function(){
       $(this).prop("disabled", true);
+      $(this).text('戦闘中');
+      $(this).addClass('btn-danger')
       $('.rsp-btn').each(function(i, elem) {
         $(elem).prop('disabled', false);
       });
       $("#result").text("じゃーんけーん");
-      $(this).fadeOut();
+      loop();
   });
+
+
+  function loop() {
+    index = 0;
+    timer = setInterval(function() {
+      index += 1
+      if(index > 2){
+        index = 0;
+      }
+      const path = ['paper.png', 'rock.png', 'scissors.png'][index]
+      $('#bobrspimg').attr('src', 'img/' + path)
+    }, 50);
+  }
 
   $(".rsp-btn").click(function(){
     var opponentHand = bobHand();
@@ -78,13 +94,21 @@ jQuery(function($){
       $('#winning_streak').hide();
     }
     $("#result").text(RESULT_MESSAGE[result]);
+    $('.rsp-btn').each(function(i, elem) {
+      $(elem).prop('disabled', true);
+    });
+    $('#start').text('戦闘する')
+    $('#start').removeClass('btn-danger')
+    $('#start').prop('disabled', false)
   });
 
   function bobHand() {
-    return HAND_TYPE[ Math.floor(Math.random() * 3) ];
+    return HAND_TYPE[index]
+    //return HAND_TYPE[ Math.floor(Math.random() * 3) ];
   }
 
   function judge(myHand, opponentHand) {
+    clearInterval(timer);
     var html = '<td>' + HAND_NAME[myHand] + '</td><td>' + HAND_NAME[opponentHand] + '</td>';
     var result;
     if (myHand === opponentHand) {
