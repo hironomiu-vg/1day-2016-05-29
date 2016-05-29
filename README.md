@@ -1,5 +1,6 @@
-# チーム爽健美茶 bicha-devブランチ
-# rock-paper-scissors-pair-programming
+# チーム濃い茶の開発ブランチ
+
+チーム爽健美茶 bicha-devブランチ の続き
 
 ## 動作環境
 node.js,npmがインストールされていること
