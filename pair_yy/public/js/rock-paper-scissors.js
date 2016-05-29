@@ -48,6 +48,11 @@ jQuery(function($){
     $("#result").text(RESULT_MESSAGE[result]);
     $("#total").text(RESULT_TOTAL[1]+"勝"+RESULT_TOTAL[2]+"敗"+RESULT_TOTAL[0]+"分け");
   });
+  
+  $(document).ready(function(){
+    document.title = "rock-paper-scissors";
+    $("#page_title").text("rock-paper-scissors");
+  });
 
   function bobHand() {
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
