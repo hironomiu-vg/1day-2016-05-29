@@ -17,3 +17,6 @@ hello, git!
   - 修士です
 - 東京に住んでいます
 - お腹減りました
+
+# mochi
+- I love :sushi:.
