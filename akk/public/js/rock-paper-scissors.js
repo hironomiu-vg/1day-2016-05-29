@@ -141,11 +141,20 @@ jQuery(function($){
     $("#second-button-area").empty();
     selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
+    $("#notification").text("");
+    var notification = "";
     if (lose_num >= 2) {
-      $("#notification").text("劣勢!! ボブは一種類しか選べません...");
+      notification += "劣勢!! ボブは一種類しか選べません...";
     } else if (win_num >= 2) {
-      $("#notification").text("優勢!! あなたは一種類しか選べません...");
+      notification += "優勢!! あなたは一種類しか選べません...";
     }
+    if (playerHP < 5) {
+      notification += "ピンチ! パワーアップ!!";
+    }
+    if (bobHP < 5) {
+      notification += "ボブがパワーアップ!!";
+    }
+    $("#notification").text(notification);
     setTimeout(setRspButtons, 1000);
   }
 
@@ -176,11 +185,17 @@ jQuery(function($){
     switch (result) {
       case RESULT_CODE.WIN:
         decBobHP();
+        if (playerHP < 5) {
+          decBobHP();
+        }
         win_num++;
         lose_num = 0;
         break;
       case RESULT_CODE.LOSE:
         decPlayerHP();
+        if (bobHP < 5) {
+          decPlayerHP();
+        }
         win_num = 0;
         lose_num++;
         break;
