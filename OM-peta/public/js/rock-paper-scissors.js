@@ -35,6 +35,17 @@ jQuery(function($){
     $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
     $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
     $("#result").text(RESULT_MESSAGE[result]);
+    console.log($('#result').text())
+    if($('#result').text()=="You win!"){
+        let win = $('#win').text();
+        if(win == ""){
+            $('#win').text('1');
+        } else {
+            win = Number(win)
+            win ++ ;
+            $('#result').text(win);
+        }
+    }
   });
 
   function bobHand() {
