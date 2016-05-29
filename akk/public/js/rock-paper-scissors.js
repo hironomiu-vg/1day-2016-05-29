@@ -35,6 +35,14 @@ jQuery(function($){
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
   }
 
+  function bobHands(n) {
+    var res = [];
+    for (var i = 0; i < n; i++) {
+      res.push(HAND_TYPE[Math.floor(Math.random() * 3)]);
+    }
+    return res;
+  }
+
   function judge(myHand, opponentHand) {
     var result;
     if (myHand === opponentHand) {
@@ -49,14 +57,22 @@ jQuery(function($){
     return result;
   }
 
+  var selected = [];
+  var bobSelected = [];
+
   function setRspOnClick() {
     $(".rsp-btn").click(function() {
-      var opponentHand = bobHand();
-      var result = judge( $(this).attr("id"), opponentHand);
+      selected.push($(this).attr("id"));
+      if (selected.length == 2) {
+        bobSelected = bobHands(2);
+        selectStep();
+        return;
+      }
+      // var result = judge( $(this).attr("id"), opponentHand);
 
-      $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
-      $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
-      $("#result").text(RESULT_MESSAGE[result]);
+      // $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
+      // $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
+      // $("#result").text(RESULT_MESSAGE[result]);
     });
   }
 
@@ -70,11 +86,43 @@ jQuery(function($){
 
   function setStartButton() {
     $("#button-area").empty();
-    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='start'>スタート</button> </div>").appendTo($("#button-area"));
+    $("<div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary' id='start'>スタート</button> </div>").appendTo($("#button-area"));
+    $("#start").click(onStart);
   }
 
   function onStart() {
+    $("#second-button-area").empty();
+    selected = [];
     $("#button-area").html($("<h1><strong><p>じゃーんけーん</p></strong></h1>"));
-    setTimeout(setRspButtons, 1000);
+    setTimeout(setRspButtons, 0);
   }
+
+  function selectStep() {
+    var p = $("#second-button-area");
+    p.empty();
+    var myhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>あなた</h4></div>");
+    for (var i = 0; i < selected.length ; i++) {
+      $("<h4/><button type='button' class='second-rsp-button' id='" + selected[i] + "'><img src='img/" + selected[i] + ".png' /></button>").appendTo(myhand);
+    }
+    myhand.appendTo(p);
+    console.log(bobSelected);
+    var bobhand = $("<div class='col-sm-6 col-xs-6 text-center'><h4>ボブ</h4></div>");
+    for (var i = 0; i < bobSelected.length ; i++) {
+      $("<h4></h4><img src='img/" + bobSelected[i] + ".png' />").appendTo(bobhand);
+    }
+    bobhand.appendTo(p);
+    $('.second-rsp-button').click(onSecondSelect);
+  }
+
+  function onSecondSelect() {
+    var bob = bobSelected[Math.floor(Math.random() * bobSelected.length)];
+    var result = judge($(this).attr("id"), bob);
+
+    $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
+    $("#bobrspimg").attr("src", "img/" + bob + ".png");
+    $("#result").text(RESULT_MESSAGE[result]);
+
+    $('.second-rsp-button').unbind("click");
+  }
+
 });
