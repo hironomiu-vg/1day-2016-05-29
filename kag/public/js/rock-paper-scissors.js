@@ -44,16 +44,6 @@ jQuery(function($){
       });
   });
 
-  $(".rsp-btn").click(function(){
-    var opponentHand = bobHand();
-    var result = judge( $(this).attr("id"), opponentHand);
-
-    $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
-    $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
-    $("#result").text(RESULT_MESSAGE[result]);
-
-  });
-
 
   function bobHand() {
 
@@ -81,19 +71,30 @@ jQuery(function($){
   }
 
   function onStart() {
-    $("<h1><strong><p id='result' class='text-center'>じゃーんけーん</p></strong></h1>").appendTo($("#start-area"));;
+    $("#start-area").html($("<h1><strong><p id='result' class='text-center'>じゃーんけーん</p></strong></h1>"));
     setTimeout(makeHandBtn, 1000);
   }
 
   function makeHandBtn() {
     $("#start-area").html($(" <div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='rock'>グー　</button> </div> <div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='scissors'>チョキ</button> </div> <div class='col-sm-4 col-xs-4'> <button type='button' class='btn-lg btn-primary rsp-btn' id='paper'>パー　</button> </div>"));
+
+    $(".rsp-btn").click(function(){
+      var opponentHand = bobHand();
+      var result = judge( $(this).attr("id"), opponentHand);
+
+      $("#myrspimg").attr("src", "img/" + $(this).attr("id") + ".png");
+      $("#bobrspimg").attr("src", "img/" + opponentHand + ".png");
+      $("#result").text(RESULT_MESSAGE[result]);
+
+      makeStartBtn($("#start-area"));
+    });
   }
 
   function makeStartBtn(parent) {
-    $("<button>", {
+    parent.html($("<button>", {
       "class": "btn-lg btn-primary",
       text: "Start",
       click: onStart
-    }).appendTo(parent);
+    }));
   }
 });
