@@ -5,6 +5,7 @@ jQuery(function($){
   var RESULT_MESSAGE = [ "draw.","You win!","You lose!" ];
 
   $(function() {
+    document.title = "rock-paper-scissors"  
       $.ajax({
           url: '/api/missions',
           type: 'GET',
@@ -38,6 +39,7 @@ jQuery(function($){
   });
 
   function bobHand() {
+
     return HAND_TYPE[ Math.floor(Math.random() * 3) ];
   }
 
