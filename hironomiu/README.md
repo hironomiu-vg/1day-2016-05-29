@@ -2,7 +2,7 @@
 
 hello!!
 
-2016-05-29
+2016-05-29aaaaaaaaaaaaaaaaaa
 
 
 
@@ -40,7 +40,7 @@ please call me teee
 
 # S-Shimotori
 
-hello, git!  
+hello, git!
 :sushi:
 
 サーモンが好きです
